@@ -11,3 +11,4 @@ reddit = praw.Reddit('9kbabyyyyyyyyyyyyy')
 bitcoinsub = reddit.subreddit("bitcoin")
 cryptosub = reddit.subreddit("cryptoCurrency")
 
+print(reddit.user.me())

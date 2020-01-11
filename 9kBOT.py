@@ -9,6 +9,7 @@ import json
 
 
 
+
 #GET request url
 coin_url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
 
@@ -59,15 +60,15 @@ except (ConnectionError, Timeout, TooManyRedirects) as e:
 if btc > btc_prev and btc > 9000 and btc_prev < 9000:
         reddit.subreddit('bitcoin').submit(over_title, url=over_url)
         reddit.subreddit('cryptocurrency').submit(under_title, url=under_url)
-        btc_prev = btc
-        btc_text.write(str(btc_prev), 'w')
+      
         print('over @ ' + str(btc))
 elif btc < btc_prev and btc < 9000 and btc_prev > 9000:
         reddit.subreddit('bitcoin').submit(under_title, url=under_url)
         reddit.subreddit('cryptocurrency').submit(under_title, url=under_url)
-        btc_prev = btc
-        btc_text.write(str(btc_prev))
         print('under @ ' + str(btc))
+
+btc_prev = btc
+btc_text.write(str(btc_prev), 'w')
 btc_text.close()
 
 

@@ -18,10 +18,10 @@ reddit = praw.Reddit('BTC9KBABY') #selects reddit user account. password is in p
 
 
 btc_text = open("prev_price.txt", "r") #opens previous price file
+btc_prev = float(btc_text.read())
 
-btc_prev = int(btc_text.read()) #sets previous btc price
+btc_text.close()
 
-btc = data["data"]["1"]["quote"]["USD"]["price"] #coinmarketcap api request sets btc price 
 
 #post submission info if going up
 over_title = 'It’s over 9000!!!!'
@@ -52,15 +52,15 @@ parameters = {
 try:
   response = session.get(coin_url, params=parameters)
   data = json.loads(response.text)
-  print(data["data"]["1"]["quote"]["USD"]["price"] + '\n \n API request succesful.')
+  btc = data["data"]["1"]["quote"]["USD"]["price"] #coinmarketcap api request sets btc price 
+  print(str(data["data"]["1"]["quote"]["USD"]["price"]) + '\n \n API request succesful.')
 except (ConnectionError, Timeout, TooManyRedirects) as e:
   print(e)
 
 #price movement comparisons for submission type
 if btc > btc_prev and btc > 9000 and btc_prev < 9000:
         reddit.subreddit('bitcoin').submit(over_title, url=over_url)
-        reddit.subreddit('cryptocurrency').submit(under_title, url=under_url)
-      
+        reddit.subreddit('cryptocurrency').submit(under_title, url=under_url)    
         print('over @ ' + str(btc))
 elif btc < btc_prev and btc < 9000 and btc_prev > 9000:
         reddit.subreddit('bitcoin').submit(under_title, url=under_url)
@@ -68,7 +68,9 @@ elif btc < btc_prev and btc < 9000 and btc_prev > 9000:
         print('under @ ' + str(btc))
 
 btc_prev = btc
-btc_text.write(str(btc_prev), 'w')
+
+btc_text = open("prev_price.txt", "w") #opens previous price file
+btc_text.write(str(btc_prev))
 btc_text.close()
 
 

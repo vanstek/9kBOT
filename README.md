@@ -1,5 +1,5 @@
 # 9kBOT
-This will NOT work with python 2. PRAW requires Python 3.5 or higher
+Requires Python 3.5 or higher
  
 CRONTAB Code in bash
 This is to create a job that automates the python script every 5 minutes. (could do up to 1 minute but free-tier CoinMarketCap API only allows for 333 requests a day)

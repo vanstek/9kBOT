@@ -29,7 +29,7 @@ over_url = 'https://imgur.com/jyoZGyW'
 
 #post submission info if going down
 under_title = 'It’s under 9000!!!!'
-under_url = 'https://imgur.com/jyoZGyW'
+under_url = 'https://i.imgur.com/SyzEGwl.png
 
 #opens api key file so that api key is not in source code
 key = open('coinmarketcap_api_key.txt')
